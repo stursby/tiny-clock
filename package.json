@@ -4,9 +4,11 @@
   "main": "main.js",
   "license": "MIT",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-packager ."
   },
   "devDependencies": {
+    "electron-packager": "^8.6.0",
     "electron-prebuilt": "^1.4.13"
   }
 }
