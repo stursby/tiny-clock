@@ -6,10 +6,13 @@
   "license": "MIT",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager ."
+    "build": "electron-packager . --overwrite"
   },
   "devDependencies": {
     "electron-packager": "^8.6.0",
     "electron-prebuilt": "^1.4.13"
+  },
+  "dependencies": {
+    "electron-positioner": "^3.0.0"
   }
 }

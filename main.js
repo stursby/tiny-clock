@@ -1,18 +1,21 @@
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
 const url = require('url')
+const Positioner = require('electron-positioner')
 
 let win
 
 function createWindow () {
   win = new BrowserWindow({
     width: 90,
-    height: 34,
+    height: 22,
     transparent: true,
     frame: false,
     alwaysOnTop: true,
     resizable: false
   })
+  positioner = new Positioner(win)
+  positioner.move('topRight')
 
   win.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
