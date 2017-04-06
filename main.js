@@ -12,7 +12,8 @@ function createWindow () {
     transparent: true,
     frame: false,
     alwaysOnTop: true,
-    resizable: false
+    resizable: false,
+    icon: path.join(__dirname, 'assets/icons/png/64x64.png')
   })
   positioner = new Positioner(win)
   positioner.move('topRight')

@@ -1,2 +1,3 @@
 node_modules
-tiny-clock-darwin-x64
+dist
+.DS_Store
