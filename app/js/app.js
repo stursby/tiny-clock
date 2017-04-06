@@ -8,7 +8,7 @@ function startTime() {
   h = h === 0 ? 12 : (h > 12 ? h - 12 : h)
   m = m < 10 ? `0${m}` : m
   s = s < 10 ? `0${s}` : s
-  time.innerHTML = `${h}<span class="${s}">:</span>${m} ${ap}`
+  time.innerHTML = `${h}:${m} ${ap}`
   requestAnimationFrame(startTime)
 }
 requestAnimationFrame(startTime)

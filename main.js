@@ -7,6 +7,9 @@ let positioner
 let win
 
 function createWindow () {
+  win = null
+  positioner = null
+
   win = new BrowserWindow({
     width: 120,
     height: 24,
