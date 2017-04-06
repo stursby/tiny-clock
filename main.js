@@ -43,6 +43,7 @@ function createWindow () {
     win = null
     positioner = null
   })
+
 }
 
 app.on('ready', createWindow)
