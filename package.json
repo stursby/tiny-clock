@@ -7,7 +7,7 @@
   "repository": "https://github.com/stursby/tiny-clock",
   "bugs": "https://github.com/stursby/tiny-clock/issues",
   "scripts": {
-    "start": "electron .",
+    "start": "nodemon -L --ext js,html,css --watch main.js --watch app --exec 'electron .'",
     "build": "electron-packager . --overwrite --prune=true --out=dist",
     "build-linux": "electron-packager . --overwrite --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=dist",
     "build-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=dist",
@@ -16,9 +16,10 @@
   "devDependencies": {
     "electron": "^1.6.2",
     "electron-packager": "^8.6.0",
-    "electron-prebuilt": "^1.4.13"
+    "nodemon": "^1.11.0"
   },
   "dependencies": {
+    "electron-is-dev": "^0.1.2",
     "electron-positioner": "^3.0.0"
   }
 }

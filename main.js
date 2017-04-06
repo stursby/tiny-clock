@@ -2,6 +2,7 @@ const { app, BrowserWindow } = require('electron')
 const path = require('path')
 const url = require('url')
 const Positioner = require('electron-positioner')
+const isDev = require('electron-is-dev')
 
 let positioner
 let win
@@ -37,9 +38,13 @@ function createWindow () {
     slashes: true
   }))
 
+  if (isDev) {
+    win.webContents.openDevTools({ detach: true })
+  }
+
   win.on('resize', positionWin)
 
-  win.on('closed', () => {    
+  win.on('closed', () => {
     win = null
     positioner = null
   })
