@@ -3,6 +3,7 @@ const path = require('path')
 const url = require('url')
 const Positioner = require('electron-positioner')
 
+let positioner
 let win
 
 function createWindow () {
@@ -13,19 +14,25 @@ function createWindow () {
     frame: false,
     alwaysOnTop: true,
     resizable: false,
+    title: 'tiny clock',
     icon: path.join(__dirname, 'assets/icons/png/64x64.png')
   })
   positioner = new Positioner(win)
   positioner.move('topRight')
 
   win.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
+    pathname: path.join(__dirname, 'app/index.html'),
     protocol: 'file:',
     slashes: true
   }))
 
-  win.on('closed', () => {
+  win.on('resize', () => {
+    positioner.move('topRight')
+  })
+
+  win.on('closed', () => {    
     win = null
+    positioner = null
   })
 }
 
