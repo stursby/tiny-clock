@@ -1,6 +1,6 @@
 # tiny-clock
 
-> Just a tiny floating clock for macOS.
+> Just a tiny floating clock.
 
 ![demo](tiny-clock.gif)
 
