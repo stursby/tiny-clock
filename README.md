@@ -26,10 +26,19 @@ Run the Electron app in Development
 yarn start
 ```
 
-Build the app for macOS
-
 ### Build
 
+Build the app for macOS
 ```bash
-yarn build
+yarn build-mac
+```
+
+Build the app for Linux
+```bash
+yarn build-linux
+```
+
+Build the app for Windows
+```bash
+yarn build-windows
 ```
