@@ -1,25 +1,17 @@
-const { remote } = require('electron')
-const { Menu, MenuItem } = remote
-const win = remote.getCurrentWindow()
-const menu = new Menu()
+const { ipcRenderer } = require('electron')
 
 let showSeconds = false
 let blinkSeparator = false
 
-menu.append(new MenuItem({label: 'toggle theme', click() {
+ipcRenderer.on('toggleTheme', () => {
   document.body.classList.toggle('theme-dark')
   document.body.classList.toggle('theme-light')
-}}))
-menu.append(new MenuItem({label: 'toggle seconds', click() {
+})
+ipcRenderer.on('toggleSeconds', () => {
   showSeconds = !showSeconds
-}}))
-menu.append(new MenuItem({label: 'toggle blink', click() {
+})
+ipcRenderer.on('toggleBlink', () => {
   blinkSeparator = !blinkSeparator
-}}))
-
-window.addEventListener('contextmenu', (e) => {
-  e.preventDefault()
-  menu.popup(win)
 })
 
 function startTime() {
