@@ -8,17 +8,25 @@ let win
 
 function createWindow () {
   win = new BrowserWindow({
-    width: 90,
-    height: 22,
+    width: 120,
+    height: 24,
     transparent: true,
     frame: false,
     alwaysOnTop: true,
     resizable: false,
+    textAreasAreResizable: false,
     title: 'tiny clock',
     icon: path.join(__dirname, 'assets/icons/png/64x64.png')
   })
+
+  function positionWin () {
+    positioner.move('topRight')
+    const [x, y] = win.getPosition()
+    win.setPosition(x - 10, y + 5)
+  }
+
   positioner = new Positioner(win)
-  positioner.move('topRight')
+  positionWin()
 
   win.loadURL(url.format({
     pathname: path.join(__dirname, 'app/index.html'),
@@ -26,14 +34,13 @@ function createWindow () {
     slashes: true
   }))
 
-  win.on('resize', () => {
-    positioner.move('topRight')
-  })
+  win.on('resize', positionWin)
 
   win.on('closed', () => {    
     win = null
     positioner = null
   })
+
 }
 
 app.on('ready', createWindow)
@@ -41,11 +48,5 @@ app.on('ready', createWindow)
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
-  }
-})
-
-app.on('activate', () => {
-  if (win === null) {
-    createWindow()
   }
 })
