@@ -3,11 +3,12 @@ const moment = require('moment')
 
 let showSeconds = false
 
-ipcRenderer.on('toggleTheme', () => {
-  document.body.classList.toggle('theme-light')
+ipcRenderer.on('showSeconds', (e, value) => {
+  showSeconds = value
 })
-ipcRenderer.on('toggleSeconds', () => {
-  showSeconds = !showSeconds
+ipcRenderer.on('changeTheme', (e, theme) => {
+  document.body.classList = ''
+  document.body.classList.add(`theme-${theme}`)
 })
 
 function startTime() {

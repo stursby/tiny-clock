@@ -49,17 +49,30 @@ function createWindow () {
     label: 'View',
     role: 'window',
     submenu: [{
-      label: 'Toggle Theme',
-      click() {
-        win.webContents.send('toggleTheme')
+      label: 'Choose Theme',
+      submenu: [{
+        type: 'radio',
+        label: 'Dark Theme',
+        checked: true,
+        click() {
+          win.webContents.send('changeTheme', 'dark')
+        }
+      }, {
+        type: 'radio',
+        label: 'Light Theme',
+        click() {
+          win.webContents.send('changeTheme', 'light')
+        }
+      }]
+    }, {
+      label: 'Show Seconds',
+      type: 'checkbox',
+      checked: false,
+      click(menuItem) {
+        win.webContents.send('showSeconds', menuItem.checked)
       }
     }, {
-      label: 'Toggle Seconds',
-      click() {
-        win.webContents.send('toggleSeconds')
-      }
-    }, {
-      role: 'divider'
+      type: 'separator'
     }, {
       role: 'quit'
     }]

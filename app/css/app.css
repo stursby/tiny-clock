@@ -9,8 +9,6 @@ html {
 body {
   -webkit-app-region: drag;
   align-items: center;
-  background: rgba(0, 0, 0, 0.75);
-  color: #ffffff;
   display: flex;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 16px;
@@ -30,6 +28,11 @@ body {
 
 #time {
   display: block;
+}
+
+.theme-dark {
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
 }
 .theme-light {
   background: rgba(255, 255, 255, 0.75);
