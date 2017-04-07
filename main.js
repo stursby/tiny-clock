@@ -57,6 +57,8 @@ function createWindow () {
       }
     }, {
       role: 'divider'
+    }, {
+      role: 'quit'
     }]
   }]
   const menu = Menu.buildFromTemplate(template)
