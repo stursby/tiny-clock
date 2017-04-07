@@ -2,7 +2,6 @@ const { ipcRenderer } = require('electron')
 const moment = require('moment')
 
 let showSeconds = false
-let blinkSeparator = false
 
 ipcRenderer.on('toggleTheme', () => {
   document.body.classList.toggle('theme-light')
