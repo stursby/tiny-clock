@@ -15,13 +15,16 @@ function createWindow () {
   win = new BrowserWindow({
     width: 120,
     height: 24,
-    transparent: true,
-    frame: false,
     alwaysOnTop: true,
+    frame: false,
+    fullscreenable: false,
+    icon: path.join(__dirname, 'assets/icons/png/64x64.png'),
+    maximizable: false,
+    minimizable: false,
     resizable: false,
     textAreasAreResizable: false,
     title: 'tiny clock',
-    icon: path.join(__dirname, 'assets/icons/png/64x64.png')
+    transparent: true
   })
 
   function positionWin () {
@@ -53,20 +56,9 @@ function createWindow () {
         win.webContents.send('toggleSeconds')
       }
     }, {
-      label: 'Toggle Blinking Separator',
-      click() {
-        win.webContents.send('toggleBlink')
-      }
+      role: 'divider'
     }]
   }]
-  if (process.platform === 'darwin') {
-    template.unshift({
-      label: app.getName(),
-      submenu: [{
-        role: 'quit'
-      }]
-    })
-  }
   const menu = Menu.buildFromTemplate(template)
   Menu.setApplicationMenu(menu)
 
