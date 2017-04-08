@@ -101,21 +101,22 @@ app.on('window-all-closed', () => {
 })
 
 const { autoUpdater } = require('electron-updater')
+if (!isDev) {
+  autoUpdater.addListener('update-available', (event) => {
+    console.log('update-available')
+  })
+  autoUpdater.addListener('update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateURL) => {
+    console.log('update-downloaded')
+  })
+  autoUpdater.addListener('error', (error) => {
+    console.log('error')
+  })
+  autoUpdater.addListener('checking-for-update', (event) => {
+    console.log('checking for updates')
+  })
+  autoUpdater.addListener('update-not-available', (event) => {
+    console.log('update not available')
+  })
 
-autoUpdater.addListener('update-available', (event) => {
-  console.log('update-available')
-})
-autoUpdater.addListener('update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateURL) => {
-  console.log('update-downloaded')
-})
-autoUpdater.addListener('error', (error) => {
-  console.log('error')
-})
-autoUpdater.addListener('checking-for-update', (event) => {
-  console.log('checking for updates')
-})
-autoUpdater.addListener('update-not-available', (event) => {
-  console.log('update not available')
-})
-
-autoUpdater.checkForUpdates()
+  autoUpdater.checkForUpdates()
+}
