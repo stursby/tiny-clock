@@ -3,6 +3,7 @@ const path = require('path')
 const url = require('url')
 const Positioner = require('electron-positioner')
 const isDev = require('electron-is-dev')
+const settings = require('electron-settings')
 
 let positioner
 let win
@@ -44,6 +45,8 @@ function createWindow () {
     slashes: true
   }))
 
+  const { themeSetting, showSecondsSetting } = settings.getAll()
+
   const template = [{
     label: 'View',
     role: 'window',
@@ -52,23 +55,28 @@ function createWindow () {
       submenu: [{
         type: 'radio',
         label: 'Dark Theme',
-        checked: true,
+        checked: (themeSetting === 'dark') ? true : false,
         click() {
           win.webContents.send('changeTheme', 'dark')
+          settings.set('themeSetting', 'dark')
         }
       }, {
         type: 'radio',
         label: 'Light Theme',
+        checked: (themeSetting === 'light') ? true : false,
         click() {
           win.webContents.send('changeTheme', 'light')
+          settings.set('themeSetting', 'light')
         }
       }]
     }, {
       label: 'Show Seconds',
       type: 'checkbox',
-      checked: false,
+      checked: (showSecondsSetting !== undefined) ? showSecondsSetting : false,
       click(menuItem) {
         win.webContents.send('showSeconds', menuItem.checked)
+        const value = (menuItem.checked) ? true : false
+        settings.set('showSecondsSetting', value)
       }
     }, {
       type: 'separator'
