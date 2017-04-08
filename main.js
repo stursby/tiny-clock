@@ -15,13 +15,19 @@ function createWindow () {
   win = new BrowserWindow({
     width: 120,
     height: 24,
-    transparent: true,
-    frame: false,
     alwaysOnTop: true,
+    frame: false,
+    focusable: false,
+    fullscreenable: false,
+    hasShadow: false,
+    icon: path.join(__dirname, 'assets/icons/png/64x64.png'),
+    maximizable: false,
+    minimizable: false,
     resizable: false,
+    skipTaskbar: false,
     textAreasAreResizable: false,
     title: 'tiny clock',
-    icon: path.join(__dirname, 'assets/icons/png/64x64.png')
+    transparent: true
   })
 
   function positionWin () {
@@ -43,30 +49,34 @@ function createWindow () {
     label: 'View',
     role: 'window',
     submenu: [{
-      label: 'Toggle Theme',
-      click() {
-        win.webContents.send('toggleTheme')
+      label: 'Choose Theme',
+      submenu: [{
+        type: 'radio',
+        label: 'Dark Theme',
+        checked: true,
+        click() {
+          win.webContents.send('changeTheme', 'dark')
+        }
+      }, {
+        type: 'radio',
+        label: 'Light Theme',
+        click() {
+          win.webContents.send('changeTheme', 'light')
+        }
+      }]
+    }, {
+      label: 'Show Seconds',
+      type: 'checkbox',
+      checked: false,
+      click(menuItem) {
+        win.webContents.send('showSeconds', menuItem.checked)
       }
     }, {
-      label: 'Toggle Seconds',
-      click() {
-        win.webContents.send('toggleSeconds')
-      }
+      type: 'separator'
     }, {
-      label: 'Toggle Blinking Separator',
-      click() {
-        win.webContents.send('toggleBlink')
-      }
+      role: 'quit'
     }]
   }]
-  if (process.platform === 'darwin') {
-    template.unshift({
-      label: app.getName(),
-      submenu: [{
-        role: 'quit'
-      }]
-    })
-  }
   const menu = Menu.buildFromTemplate(template)
   Menu.setApplicationMenu(menu)
 

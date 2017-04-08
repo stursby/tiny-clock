@@ -18,31 +18,23 @@ body {
   margin: 0;
   overflow: hidden;
   text-align: center;
+  transition: all 0.3s ease-out;
   width: 100%;
 }
 
-#time {
-  display: block;
-}
-#time span {
-  transition: color 0.3s ease-out;
-}
 
 ::-moz-selection { background: rgba(0, 0, 0, 0); }
 ::selection { background: rgba(0, 0, 0, 0); }
 
-.theme-dark {
-  background: rgba(0, 0, 0, 0.5);
-  color: #ffffff;
-}
-.theme-dark .odd {
-  color: rgba(255, 255, 255, 0);
+#time {
+  display: block;
 }
 
-.theme-light {
-  background: rgba(255, 255, 255, 0.5);
-  color: #000000;
+.theme-dark {
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
 }
-.theme-light .odd {
-  color: rgba(0, 0, 0, 0);
+.theme-light {
+  background: rgba(255, 255, 255, 0.75);
+  color: #000000;
 }
