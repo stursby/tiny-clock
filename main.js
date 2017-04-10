@@ -66,9 +66,10 @@ function createWindow () {
   }))
 
   const template = [{
-    label: 'View',
     role: 'window',
     submenu: [{
+      role: 'about'
+    }, {
       label: 'Choose Theme',
       submenu: [{
         type: 'radio',

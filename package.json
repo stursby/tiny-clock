@@ -2,7 +2,7 @@
   "private": true,
   "name": "tiny-clock",
   "description": "Just a tiny floating clock.",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "author": {
     "name": "Charlie Hield",
     "url": "https://github.com/stursby"
