@@ -5,6 +5,8 @@ const Positioner = require('electron-positioner')
 const isDev = require('electron-is-dev')
 const settings = require('electron-settings')
 
+const { positionSetting, themeSetting, showSecondsSetting } = settings.getAll()
+
 let positioner
 let win
 
@@ -31,12 +33,30 @@ function createWindow () {
   })
 
   function positionWin () {
-    positioner.move('topRight')
-    const [x, y] = win.getPosition()
-    win.setPosition(x - 10, y + 5)
+    let pos = settings.get('positionSetting')
+    positioner.move(pos)
+    let [x, y] = win.getPosition()
+    if (pos === 'topLeft') {
+      x += 10
+      y += 5
+    } else if (pos === 'topRight') {
+      x -= 10
+      y += 5
+    } else if (pos === 'bottomLeft') {
+      x += 10
+      y -= 5
+    } else if (pos === 'bottomRight') {
+      x -= 10
+      y -= 5
+    }
+    win.setPosition(x, y)
   }
 
   positioner = new Positioner(win)
+  if (!positionSetting) {
+    settings.set('positionSetting', 'topRight')
+  }
+  settings.watch('positionSetting', positionWin)
   positionWin()
 
   win.loadURL(url.format({
@@ -44,8 +64,6 @@ function createWindow () {
     protocol: 'file:',
     slashes: true
   }))
-
-  const { themeSetting, showSecondsSetting } = settings.getAll()
 
   const template = [{
     label: 'View',
@@ -67,6 +85,37 @@ function createWindow () {
         click() {
           win.webContents.send('changeTheme', 'light')
           settings.set('themeSetting', 'light')
+        }
+      }]
+    }, {
+      label: 'Choose Position',
+      submenu: [{
+        type: 'radio',
+        label: 'Top Left',
+        checked: (positionSetting === 'topLeft') ? true : false,
+        click() {
+          settings.set('positionSetting', 'topLeft')
+        }
+      }, {
+        type: 'radio',
+        label: 'Top Right',
+        checked: (positionSetting === 'topRight') ? true : false,
+        click() {
+          settings.set('positionSetting', 'topRight')
+        }
+      }, {
+        type: 'radio',
+        label: 'Bottom Left',
+        checked: (positionSetting === 'bottomLeft') ? true : false,
+        click() {
+          settings.set('positionSetting', 'bottomLeft')
+        }
+      }, {
+        type: 'radio',
+        label: 'Bottom Right',
+        checked: (positionSetting === 'bottomRight') ? true : false,
+        click() {
+          settings.set('positionSetting', 'bottomRight')
         }
       }]
     }, {
@@ -115,6 +164,7 @@ if (!isDev) {
   })
   autoUpdater.addListener('update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateURL) => {
     console.log('update-downloaded')
+    autoUpdater.quitAndInstall()
   })
   autoUpdater.addListener('error', (error) => {
     console.log('error')
